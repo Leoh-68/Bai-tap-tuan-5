@@ -61,6 +61,7 @@ flutter:
   assets:
     - images/background.jpg
     - images/mail_icon1.png
+    - images/loading.png
   
   #   - images/a_dot_ham.jpeg
 
