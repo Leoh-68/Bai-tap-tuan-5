@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -18,7 +17,7 @@ class _MyApp extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    new Future.delayed(
+     Future.delayed(
         const Duration(seconds: 3),
         () => Navigator.push(
               context,
