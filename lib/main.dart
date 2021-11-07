@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Signinpage(),
-        '/error': (context) => const ErrorPage()
+        '/error': (context) => const ErrorPage(),
+        '/loading': (context) => const LoadingScreen()
       },
     );
   }
@@ -46,6 +47,7 @@ class SigninpageState extends State<Signinpage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: "Sign In",
         home: Scaffold(
             backgroundColor: const Color.fromRGBO(0, 141, 251, 0.41),
             body: Stack(children: <Widget>[
@@ -121,6 +123,8 @@ class SigninpageState extends State<Signinpage> {
                                 setState(() {});
                                 if (_email.text != "a" || _pass.text != "a") {
                                   Navigator.pushNamed(context, '/error');
+                                } else {
+                                  Navigator.pushNamed(context, '/loading');
                                 }
                               },
                               style: ButtonStyle(
@@ -150,6 +154,7 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: "Try Again",
         home: Scaffold(
             backgroundColor: const Color.fromRGBO(0, 141, 251, 0.41),
             body: Stack(children: <Widget>[
@@ -229,5 +234,185 @@ class ErrorPage extends StatelessWidget {
                 ),
               ))
             ])));
+  }
+}
+
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({Key? key}) : super(key: key);
+  @override
+  State<LoadingScreen> createState() => _LoadingScreen();
+}
+
+class _LoadingScreen extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+        const Duration(seconds: 3),
+        () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MailScreen()),
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: "Loading........",
+        home: Scaffold(
+            backgroundColor: const Color.fromRGBO(0, 141, 251, 0.41),
+            body: Stack(children: <Widget>[
+              Center(
+                  child: Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    const Padding(padding: EdgeInsets.all(50)),
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Image.asset(
+                          "images/mail_icon1.png",
+                          scale: 5,
+                        )),
+                    const Text(
+                      "Sign In SkyMail",
+                      style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      "Speak, Chat and Gacha",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
+                    const Padding(padding: EdgeInsets.all(70)),
+                    Center(
+                        child: Image.asset(
+                      'images/loading.png',
+                      scale: 4,
+                    ))
+                  ],
+                ),
+              ))
+            ])));
+  }
+}
+
+class MailScreen extends StatefulWidget {
+  const MailScreen({Key? key}) : super(key: key);
+  @override
+  State<MailScreen> createState() => _MailScreen();
+}
+
+class _MailScreen extends State<MailScreen> {
+  @override
+  Widget build(BuildContext context) {
+    bool chk = false;
+    Widget BuildBox(IconData ico, String str) {
+      return CheckboxListTile(
+        tileColor: Colors.white,
+        secondary: Icon(ico),
+        controlAffinity: ListTileControlAffinity.leading,
+        title: Text(str),
+        value: chk,
+        onChanged: (bool? value) {
+          if (chk == false) {
+            chk = true;
+          } else {
+            chk = false;
+          }
+          setState(() {});
+        },
+      );
+    }
+
+    return MaterialApp(
+        title: "Mail Boxes",
+        theme: ThemeData(scaffoldBackgroundColor: Colors.grey[300]),
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Align(
+              alignment: Alignment.center,
+              child: Text("Mail Boxes"),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Done",
+                    style: TextStyle(color: Colors.white),
+                  ))
+            ],
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Container(
+              //     child: Padding(
+              //   padding: EdgeInsets.all(15),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //           child:
+              //       Container(
+              //         child: ,
+              //       ),
+              //     ],
+              //   ),
+              // )),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: const [
+                      Padding(padding: EdgeInsets.only(top: 20)),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Text("MailBoxes"),
+                      ),
+                    ],
+                  )),
+              BuildBox(Icons.ac_unit_outlined, "All Innox"),
+              BuildBox(Icons.ac_unit_outlined, "ICloud"),
+              BuildBox(Icons.ac_unit_outlined, "Gmail"),
+              BuildBox(Icons.ac_unit_outlined, "Hot Mails"),
+              BuildBox(Icons.ac_unit_outlined, "VIP"),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Text("SpecailFolder"),
+                      ),
+                    ],
+                  )),
+              Expanded(
+                  child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          BuildBox(Icons.ac_unit_outlined, "Secure"),
+                          BuildBox(Icons.ac_unit_outlined, "Nofications"),
+                        ],
+                      ))),
+              Container(
+                decoration: const BoxDecoration(
+                    border:
+                        Border(top: BorderSide(width: 3, color: Colors.blue))),
+                child: const SizedBox(
+                  height: 60,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Delete",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
