@@ -62,6 +62,7 @@ flutter:
     - images/background.jpg
     - images/mail_icon1.png
     - images/lock_icon.png
+    - images/loading.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
