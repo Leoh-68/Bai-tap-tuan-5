@@ -7,13 +7,13 @@ void main() {
   runApp(const MailScreen());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyAppne extends StatefulWidget {
+  const MyAppne({Key? key}) : super(key: key);
   @override
-  State<MyApp> createState() => _MyApp();
+  State<MyAppne> createState() => _MyApp();
 }
 
-class _MyApp extends State<MyApp> {
+class _MyApp extends State<MyAppne> {
   @override
   void initState() {
     super.initState();
